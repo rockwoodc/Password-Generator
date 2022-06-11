@@ -1,10 +1,10 @@
 //variables for characteristics
-var numberChars = "0123456789";
+var numberChars = [012345678,"9"]; //FIXXXXXX
 var upperChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 var lowerChars = "abcdefghijklmnopqrstuvwxyz";
 var specialChars= "!@#$%&*?"
 //variable used to combine each together?
-// var allChars = numberChars + upperChars + lowerChars + specialChars;
+
 
 // asking user for specifics for their passwords
 function userOptions() {
@@ -15,50 +15,40 @@ function userOptions() {
             return null;
         } 
         //if the user enters a password greater than 128 characters they will be asked to choose another number
-        else if (length > 128) {
+        if (length > 128) {
             alert("Please choose a password length less than 128 characters.")
             return null;
         }
     //confirm if user needs lowercase letters in password
     var confirmLowerCase = confirm("Does your password need lowercase letters?");
-        //user needs lowercase letters
-        if (confirmLowerCase) {
-             //the characters in lowerChars can be  used
-        }
-        //user does not need lowercase letters
-        else {
-             //the characters in lowerChars can NOT be  used 
-        }
+        
 
      //confirm if user needs uppercase letters in password
      var confirmUpperCase = confirm("Does your password need uppercase letters?");
-        //user needs uppercase letters
-        if (confirmUpperCase) {
-            //the characters in upperChars can be used
-        }
-        //user does not need uppercase letters
-        else {
-            //the characters in upperChars can NOT be used
-        }
+        
 
     //confrim if user needs numbers in their password
     var confirmNumber = confirm("Does your password need to contain numbers?");
-        if (confirmNumber) {
-            //the characters in numberChars can be used
-            
-        }
-        else {
-           //the characters in numberChars can NOT be used 
-        }
+        
     var confirmSpecial = confirm("Does you password need to contain a special character?")
-        if(confirmSpecial) {
-            //the characters in specialChar can be used
-        }
-        else {
-            //the characters in specialChar can NOT be used
-        }
+
+    var allChars = {
+        length:length,
+        confirmLowerCase:confirmLowerCase,
+        confirmUpperCase:confirmUpperCase,
+        confirmNumber:confirmNumber,
+        confirmSpecial:confirmSpecial
+    }
+    return allChars;
 };
-userOptions();
+
+function randomChars(Array) {
+    var randomIndex = Math.floor(Math.random() * Array.length);
+    var randomElement = Array[randomIndex];
+    return randomElement;
+}
+
+
 // Get references to the #generate element
 var generateBtn = document.querySelector("#generate");
 
@@ -75,5 +65,9 @@ function writePassword() {
   passwordText.value = password;
 
 }
+
+function generatePassword() {
+    var userChoice = userOptions();
+}
 // Add event listener to generate button
-generateBtn.addEventListener("click", writePassword);
+generateBtn.addEventListener("click", writePassword());
