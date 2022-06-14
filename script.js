@@ -1,8 +1,8 @@
 //variables for characteristics
-var numberChars = [012345678,"9"]; //FIXXXXXX
-var upperChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-var lowerChars = "abcdefghijklmnopqrstuvwxyz";
-var specialChars= "!@#$%&*?"
+var numberChars = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
+var upperChars = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
+var lowerChars = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
+var specialChars= ["!", "@", "#", "$", "%", "^", "&", "*", "(", ")", "+", "-", ".", "`", "~", "|", "<", ">", "=", "-", "_"];
 //variable used to combine each together?
 
 
@@ -59,15 +59,34 @@ function writePassword() {
     //
   var passwordText = document.querySelector("#password");
 
-//choose at least one type of character from each prompt that is confirmed
-//Password is displayed on screen
-
-  passwordText.value = password;
+passwordText.value = password;
 
 }
 
 function generatePassword() {
     var userChoice = userOptions();
-}
+    var typesChars = []
+    var actualChars= []
+    if (userChoice.confirmSpecial) {
+        typesChars = typesChars.concat(specialChars);
+        actualChars.push(randomChars(specialChars));
+    }
+    if (user.Choice.confirmNumber) {
+        typesChars = typesChars.concat(numberChars);
+        actualChars.push(randomChars(numberChars));
+    }
+    if (user.Choice.confirmLowerCase) {
+        typesChars = typesChars.concat(lowerChars);
+        actualChars.push(randomChars(lowerChars));
+    }
+    if (user.Choice.confirmUpperCase) {
+        typesChars = typesChars.concat(upperChars);
+        actualChars.push(randomChars(upperChars));
+    }
+    for (let i=0; i < userChoice.length; i++) {
+        // var generateButtonClick = document.querySelector("#generate");
+
+    }
+};
 // Add event listener to generate button
 generateBtn.addEventListener("click", writePassword());
