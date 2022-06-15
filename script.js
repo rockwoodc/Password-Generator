@@ -29,7 +29,8 @@ function userOptions() {
 
     //confrim if user needs numbers in their password
     var confirmNumber = confirm("Does your password need to contain numbers?");
-        
+    
+    //confrim if user needs special characters in their password
     var confirmSpecial = confirm("Does you password need to contain a special character?")
 
     var allChars = {
@@ -42,7 +43,7 @@ function userOptions() {
     return allChars;
 };
 
-
+//randomize the characters shown/chosen
 function randomChars(Array) {
     var randomIndex = Math.floor(Math.random() * Array.length);
     var randomElement = Array[randomIndex];
@@ -56,9 +57,7 @@ var generateBtn = document.querySelector("#generate");
 // Write password to the #password input
 function writePassword() {
   var password = generatePassword();
-  console.log(password,"password");
-    //1. filter out characters not confirmed
-    //
+    
   var passwordText = document.querySelector("#password");
         passwordText.value = password;
 
@@ -66,11 +65,10 @@ function writePassword() {
 
 function generatePassword() {
     var userChoice = userOptions();
-    console.log(userChoice);
     var typesChars = []
     var actualChars= []
     var finalPassword = []
-    
+    //these if statements will be envoked if the user chooses to use these characters and will push a random character from the arrays
     if (userChoice.confirmSpecial) {
         typesChars = typesChars.concat(specialChars);
         actualChars.push(randomChars(specialChars));
@@ -88,18 +86,16 @@ function generatePassword() {
         actualChars.push(randomChars(upperChars));
     }
 
-    console.log(actualChars);
-    console.log(typesChars);
+    //adds additional characters that fit the users choices to meet length requirements
     for (let i=0; i < userChoice.length; i++) {
         var extraChars = randomChars(typesChars);
         finalPassword.push(extraChars);
     }
     
-
     for (let i=0; i < actualChars.length; i++) {
         finalPassword[i]= actualChars[i];
     }
-    console.log(finalPassword);
+
     return finalPassword.join('');
 };
 // Add event listener to generate button
