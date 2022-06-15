@@ -5,4 +5,4 @@ This application allows users to generate a random password. The user is asked i
 
 ![Generator](./assets/generatorSS.png)
 
-<!-- [Link to deployed application] -->
+[Link to deployed application](https://rockwoodc.github.io/Password-Generator/)
