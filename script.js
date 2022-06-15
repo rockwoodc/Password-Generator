@@ -42,11 +42,12 @@ function userOptions() {
     return allChars;
 };
 
+
 function randomChars(Array) {
     var randomIndex = Math.floor(Math.random() * Array.length);
     var randomElement = Array[randomIndex];
     return randomElement;
-}
+};
 
 
 // Get references to the #generate element
@@ -55,38 +56,51 @@ var generateBtn = document.querySelector("#generate");
 // Write password to the #password input
 function writePassword() {
   var password = generatePassword();
+  console.log(password,"password");
     //1. filter out characters not confirmed
     //
   var passwordText = document.querySelector("#password");
+        passwordText.value = password;
 
-passwordText.value = password;
-
-}
+};
 
 function generatePassword() {
     var userChoice = userOptions();
+    console.log(userChoice);
     var typesChars = []
     var actualChars= []
+    var finalPassword = []
+    
     if (userChoice.confirmSpecial) {
         typesChars = typesChars.concat(specialChars);
         actualChars.push(randomChars(specialChars));
     }
-    if (user.Choice.confirmNumber) {
+    if (userChoice.confirmNumber) {
         typesChars = typesChars.concat(numberChars);
         actualChars.push(randomChars(numberChars));
     }
-    if (user.Choice.confirmLowerCase) {
+    if (userChoice.confirmLowerCase) {
         typesChars = typesChars.concat(lowerChars);
         actualChars.push(randomChars(lowerChars));
     }
-    if (user.Choice.confirmUpperCase) {
+    if (userChoice.confirmUpperCase) {
         typesChars = typesChars.concat(upperChars);
         actualChars.push(randomChars(upperChars));
     }
-    for (let i=0; i < userChoice.length; i++) {
-        // var generateButtonClick = document.querySelector("#generate");
 
+    console.log(actualChars);
+    console.log(typesChars);
+    for (let i=0; i < userChoice.length; i++) {
+        var extraChars = randomChars(typesChars);
+        finalPassword.push(extraChars);
     }
+    
+
+    for (let i=0; i < actualChars.length; i++) {
+        finalPassword[i]= actualChars[i];
+    }
+    console.log(finalPassword);
+    return finalPassword.join('');
 };
 // Add event listener to generate button
-generateBtn.addEventListener("click", writePassword());
+generateBtn.addEventListener("click", writePassword);
